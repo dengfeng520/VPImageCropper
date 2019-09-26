@@ -100,7 +100,7 @@
 }
 
 - (void)initControlBtn {
-    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50.0f, 100, 50)];
+    UIButton *cancelBtn = [[UIButton alloc] init];
     cancelBtn.backgroundColor = [UIColor blackColor];
     cancelBtn.titleLabel.textColor = [UIColor whiteColor];
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -111,8 +111,17 @@
     [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f)];
     [cancelBtn addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelBtn];
+    cancelBtn.translatesAutoresizingMaskIntoConstraints = false;
+    [[cancelBtn.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:0] setActive:true];
+    if (@available(iOS 11.0, *)) {
+        [[cancelBtn.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:0] setActive:true];
+    } else {
+        [[cancelBtn.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0] setActive:true];
+    }
+    [[cancelBtn.widthAnchor constraintEqualToConstant:100] setActive:true];
+    [[cancelBtn.heightAnchor constraintEqualToConstant:50] setActive:true];
     
-    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 100.0f, self.view.frame.size.height - 50.0f, 100, 50)];
+    UIButton *confirmBtn = [[UIButton alloc] init];
     confirmBtn.backgroundColor = [UIColor blackColor];
     confirmBtn.titleLabel.textColor = [UIColor whiteColor];
     [confirmBtn setTitle:@"OK" forState:UIControlStateNormal];
@@ -124,6 +133,15 @@
     [confirmBtn setTitleEdgeInsets:UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f)];
     [confirmBtn addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:confirmBtn];
+    confirmBtn.translatesAutoresizingMaskIntoConstraints = false;
+    [[confirmBtn.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:0] setActive:true];
+    if (@available(iOS 11.0, *)) {
+        [[confirmBtn.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:0] setActive:true];
+    } else {
+        [[confirmBtn.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0] setActive:true];
+    }
+    [[confirmBtn.widthAnchor constraintEqualToConstant:100] setActive:true];
+    [[confirmBtn.heightAnchor constraintEqualToConstant:50] setActive:true];
 }
 
 - (void)cancel:(id)sender {
